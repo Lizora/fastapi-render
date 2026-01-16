@@ -5,7 +5,7 @@
     <title>ありがとう</title>
     <style>
         body {
-            margin-bottom: 0;
+            margin: 0;
             height: 100svh;
             display: flex;
             justify-content: center;
@@ -13,13 +13,38 @@
             font-size: 170px;
             font-family: serif;
         }
+
         .vertical {
             writing-mode: vertical-rl;
             transform: translateY(-10px);
         }
+
+        .rotate {
+            animation: spin 1s linear;
+        }
+
+        @keyframes spin {
+            from {
+                transform: translateY(-10px) rotate(0deg);
+            }
+            to {
+                transform: translateY(-10px) rotate(360deg);
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="vertical">ありがとう</div>
+    <div class="vertical" id="text">ありがとう</div>
+
+    <script>
+        const text = document.getElementById("text");
+
+        document.body.addEventListener("click", () => {
+            // アニメーションをリセットして毎回回るようにする
+            text.classList.remove("rotate");
+            void text.offsetWidth; // 再描画を強制
+            text.classList.add("rotate");
+        });
+    </script>
 </body>
 </html>
